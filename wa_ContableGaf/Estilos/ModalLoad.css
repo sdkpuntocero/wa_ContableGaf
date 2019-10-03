@@ -1,0 +1,15 @@
+﻿/* UPDATEPANEL PROGRESS : masque lors du chargement des résultats */
+.update {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    min-height: 100%;
+    min-width: 100%;
+    background-image: url("../Img/ajax-loader.gif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #e4e4e6;
+    z-index: 500 !important;
+    opacity: 0.8;
+    overflow: hidden;
+}

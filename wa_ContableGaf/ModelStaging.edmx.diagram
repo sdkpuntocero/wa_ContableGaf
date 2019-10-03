@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7fa6bf73b4794380a22ccc5f41cf5eab" Name="Diagram1">
+        <EntityTypeShape EntityType="DEV_StagingModel.catClavesMovimientos" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catOperadoras" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catProveedores" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catRelUniNegOper" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catRelUsuOper" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoOperadora" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoProveedor" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblDiasFestivos" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblInventarioArchivos" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblLogCarga" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblUnidadNegocio" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblUsuarios" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catDivisas" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catFondos" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catFondos_Test" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catFondoSeries" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catPaises" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoAIMSExcedentes" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoAmortCupones" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoDEPBMX" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.catTipoDividendos" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblCargaCartera" Width="1.5" PointX="11.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblCargaDA" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblCargaMV" Width="1.5" PointX="13.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DEV_StagingModel.tblCargaVector" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catOperadoras_catProveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catOperadoras_catTipoOperadora" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catRelUniNegOper_catOperadoras" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catRelUsuOper_catOperadoras" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_InventarioArchivos_catOperadoras" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catProveedores_catTipoProveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catRelUniNegOper_catUnidadNegocio" ManuallyRouted="false" />
+        <AssociationConnector Association="DEV_StagingModel.FK_catRelUsuOper_tblUsuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

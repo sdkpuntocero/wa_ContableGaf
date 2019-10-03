@@ -1,0 +1,1599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DEV_StagingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="catClavesMovimientos">
+          <Key>
+            <PropertyRef Name="ClaveMovimientoID" />
+          </Key>
+          <Property Name="ClaveMovimiento" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveTen" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveMovDescripcion" Type="varchar" MaxLength="150" />
+          <Property Name="ClaveMovimientoID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catDivisas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catDivisas">
+          <Key>
+            <PropertyRef Name="ClaveDivisa" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Abreviacion" />
+          </Key>
+          <Property Name="ClaveDivisa" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Abreviacion" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="ClaveMonedaID" Type="int" />
+          <Property Name="ClaveCovaf" Type="int" />
+          <Property Name="DenBancoDI" Type="int" />
+          <Property Name="DenCompIDI" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catFondos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catFondos">
+          <Key>
+            <PropertyRef Name="ClaveFondo" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveFondo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catFondos_Test' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catFondos_Test">
+          <Key>
+            <PropertyRef Name="ClaveFondoID" />
+            <PropertyRef Name="FondoDescripcion" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveFondoID" Type="int" Nullable="false" />
+          <Property Name="FondoDescripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catFondoSeries' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catFondoSeries">
+          <Key>
+            <PropertyRef Name="FondoSerieID" />
+            <PropertyRef Name="ClaveFondo" />
+          </Key>
+          <Property Name="FondoSerieID" Type="int" Nullable="false" />
+          <Property Name="ClaveFondo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClaveSerie" Type="varchar" MaxLength="50" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="catOperadoras">
+          <Key>
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+          <Property Name="ClaveOperadora" Type="varchar" MaxLength="15" />
+          <Property Name="ClaveTipoOperadoraID" Type="int" />
+          <Property Name="ClaveProveedorID" Type="int" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catPaises' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catPaises">
+          <Key>
+            <PropertyRef Name="ClavePais" />
+            <PropertyRef Name="ClaveANSI" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClavePais" Type="int" Nullable="false" />
+          <Property Name="ClaveANSI" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catProveedores">
+          <Key>
+            <PropertyRef Name="ClaveProveedorID" />
+          </Key>
+          <Property Name="ClaveProveedorID" Type="int" Nullable="false" />
+          <Property Name="ClaveProveedor" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveTipoProveedorID" Type="int" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="catRelUniNegOper">
+          <Key>
+            <PropertyRef Name="ClaveUnidadNegocioOperadoraID" />
+          </Key>
+          <Property Name="ClaveUnidadNegocioOperadoraID" Type="int" Nullable="false" />
+          <Property Name="ClaveUnidadNegocioID" Type="int" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catRelUsuOper">
+          <Key>
+            <PropertyRef Name="ClaveUsuarioOperadora" />
+          </Key>
+          <Property Name="ClaveUsuarioOperadora" Type="int" Nullable="false" />
+          <Property Name="ClaveUsuarioID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catTipoAIMSExcedentes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catTipoAIMSExcedentes">
+          <Key>
+            <PropertyRef Name="ClaveTipoAIMSExcedentes" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoAIMSExcedentes" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Sub_Cta" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catTipoAmortCupones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catTipoAmortCupones">
+          <Key>
+            <PropertyRef Name="catTipoAmortCupon" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="catTipoAmortCupon" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Sub_Cta" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catTipoDEPBMX' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catTipoDEPBMX">
+          <Key>
+            <PropertyRef Name="ClaveTipoDEPBMX" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoDEPBMX" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Tasa" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.catTipoDividendos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="catTipoDividendos">
+          <Key>
+            <PropertyRef Name="ClaveTipoDividendo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoDividendo" Type="smallint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Sub_Cta_1302" Type="int" />
+          <Property Name="Sub_Cta_5131" Type="int" />
+          <Property Name="ClaveTipoDividendoCONSAR" Type="int" />
+        </EntityType>
+        <EntityType Name="catTipoOperadora">
+          <Key>
+            <PropertyRef Name="ClaveTipoOperadoraID" />
+          </Key>
+          <Property Name="ClaveTipoOperadoraID" Type="int" Nullable="false" />
+          <Property Name="ClaveTipoOperadora" Type="varchar" MaxLength="50" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="catTipoProveedor">
+          <Key>
+            <PropertyRef Name="ClaveTipoProveedorID" />
+          </Key>
+          <Property Name="ClaveTipoProveedorID" Type="int" Nullable="false" />
+          <Property Name="ClaveTipoProveedor" Type="varchar" MaxLength="50" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.tblCargaCartera' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblCargaCartera">
+          <Key>
+            <PropertyRef Name="TV" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="AreaID" Type="int" />
+          <Property Name="ClaveOperadoraID" Type="int" />
+          <Property Name="TipoInversion" Type="varchar" MaxLength="7" />
+          <Property Name="ClaveFondo" Type="varchar" MaxLength="15" />
+          <Property Name="ClaveSerie" Type="varchar" MaxLength="7" />
+          <Property Name="TV" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="TitulosIniciales" Type="decimal" Precision="15" Scale="6" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="varchar" MaxLength="50" />
+          <Property Name="FechaOper" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.tblCargaDA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblCargaDA">
+          <Key>
+            <PropertyRef Name="Derecho" />
+            <PropertyRef Name="Portafolio" />
+            <PropertyRef Name="EmisoraSerie" />
+            <PropertyRef Name="Posicion" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="ImporteBruto" />
+            <PropertyRef Name="Impuesto" />
+            <PropertyRef Name="PorcentajePosicion" />
+            <PropertyRef Name="Liquidacion" />
+            <PropertyRef Name="ImporteInicialNeto" />
+          </Key>
+          <Property Name="Derecho" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Portafolio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmisoraSerie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Posicion" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="ImporteBruto" Type="float" Nullable="false" />
+          <Property Name="Impuesto" Type="int" Nullable="false" />
+          <Property Name="PorcentajePosicion" Type="int" Nullable="false" />
+          <Property Name="Liquidacion" Type="date" Nullable="false" />
+          <Property Name="ImporteInicialNeto" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.tblCargaMV' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblCargaMV">
+          <Key>
+            <PropertyRef Name="CveFondo" />
+            <PropertyRef Name="Isin" />
+            <PropertyRef Name="CveBmv" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="FecOper" />
+            <PropertyRef Name="FecLiq" />
+            <PropertyRef Name="CveMov" />
+            <PropertyRef Name="CveLiq" />
+            <PropertyRef Name="CveTen" />
+            <PropertyRef Name="CveProv" />
+            <PropertyRef Name="Plazo" />
+            <PropertyRef Name="Tasa" />
+            <PropertyRef Name="Titulos" />
+            <PropertyRef Name="Tcambio" />
+            <PropertyRef Name="Pactado" />
+            <PropertyRef Name="ImpBruto" />
+            <PropertyRef Name="ImpInt" />
+            <PropertyRef Name="ImpComs" />
+            <PropertyRef Name="ImpIva" />
+            <PropertyRef Name="Pais" />
+            <PropertyRef Name="Moneda" />
+            <PropertyRef Name="Hora" />
+            <PropertyRef Name="TasaFv" />
+          </Key>
+          <Property Name="CveFondo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveMdo" Type="varchar" MaxLength="50" />
+          <Property Name="CveGpo" Type="varchar" MaxLength="50" />
+          <Property Name="CveInst" Type="varchar" MaxLength="50" />
+          <Property Name="Isin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveBmv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Emisora" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FecOper" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FecLiq" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveMov" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveLiq" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveTen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CveCov" Type="varchar" MaxLength="50" />
+          <Property Name="MovCnbv" Type="varchar" MaxLength="50" />
+          <Property Name="CveProv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Plazo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tasa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titulos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tcambio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pactado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImpBruto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImpInt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImpComs" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImpIva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImpIsr" Type="varchar" MaxLength="50" />
+          <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Moneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hora" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaFv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TasaRef" Type="varchar" MaxLength="50" />
+          <Property Name="Aforo" Type="varchar" MaxLength="50" />
+          <Property Name="FolFront" Type="varchar" MaxLength="50" />
+          <Property Name="CveBrok" Type="varchar" MaxLength="50" />
+          <Property Name="ComBrok" Type="varchar" MaxLength="50" />
+          <Property Name="IvaBrok" Type="varchar" MaxLength="50" />
+          <Property Name="PrecFdos" Type="varchar" MaxLength="50" />
+          <Property Name="MdoPrim" Type="varchar" MaxLength="50" />
+          <Property Name="MedioConc" Type="varchar" MaxLength="50" />
+          <Property Name="CtoUnit" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Staging.dbo.tblCargaVector' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblCargaVector">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoReg" Type="char" MaxLength="2" />
+          <Property Name="TipoMercado" Type="char" MaxLength="2" />
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="TV" Type="varchar" MaxLength="4" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" />
+          <Property Name="PrecioSucio" Type="varchar" MaxLength="50" />
+          <Property Name="PrecioLimpio" Type="varchar" MaxLength="50" />
+          <Property Name="Interes" Type="varchar" MaxLength="50" />
+          <Property Name="CveProveedor" Type="char" MaxLength="6" />
+          <Property Name="TipoEnvio" Type="varchar" MaxLength="50" />
+          <Property Name="DiasxVencer" Type="varchar" MaxLength="50" />
+          <Property Name="TasaDescto" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblDiasFestivos">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="ClavePaisID" />
+          </Key>
+          <Property Name="ClaveDiaFestivo" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClavePaisID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblInventarioArchivos">
+          <Key>
+            <PropertyRef Name="InventarioArchivos" />
+          </Key>
+          <Property Name="InventarioArchivos" Type="int" Nullable="false" />
+          <Property Name="EtapaID" Type="int" />
+          <Property Name="UnidadDeNegocioID" Type="int" />
+          <Property Name="Proceso" Type="varchar" MaxLength="50" />
+          <Property Name="Archivo" Type="varchar" MaxLength="350" />
+          <Property Name="NombreArchivo" Type="varchar" MaxLength="150" />
+          <Property Name="Ruta" Type="varchar" MaxLength="450" />
+          <Property Name="Accion" Type="varchar" MaxLength="50" />
+          <Property Name="Regulatorio" Type="varchar" MaxLength="50" />
+          <Property Name="Requisitos" Type="varchar" MaxLength="50" />
+          <Property Name="Historico" Type="varchar" MaxLength="5" />
+          <Property Name="Interaccion" Type="varchar" MaxLength="50" />
+          <Property Name="Tamano" Type="varchar" MaxLength="50" />
+          <Property Name="EstatusCargaID" Type="int" />
+          <Property Name="ClaveOperadoraID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblLogCarga">
+          <Key>
+            <PropertyRef Name="CargaDeInsumoID" />
+          </Key>
+          <Property Name="CargaDeInsumoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoInsumo" Type="varchar" MaxLength="50" />
+          <Property Name="RutaOrigen" Type="varchar" MaxLength="250" />
+          <Property Name="Archivo" Type="varchar" MaxLength="150" />
+          <Property Name="EstatusCarga" Type="bit" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUnidadNegocio">
+          <Key>
+            <PropertyRef Name="ClaveUnidadNegocioID" />
+          </Key>
+          <Property Name="ClaveUnidadNegocioID" Type="int" Nullable="false" />
+          <Property Name="UnidadNegocio" Type="varchar" MaxLength="50" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="tblUsuarios">
+          <Key>
+            <PropertyRef Name="ClaveUsuarioID" />
+          </Key>
+          <Property Name="ClaveUsuarioID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_catOperadoras_catProveedores">
+          <End Role="catProveedores" Type="Self.catProveedores" Multiplicity="0..1" />
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catProveedores">
+              <PropertyRef Name="ClaveProveedorID" />
+            </Principal>
+            <Dependent Role="catOperadoras">
+              <PropertyRef Name="ClaveProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catOperadoras_catTipoOperadora">
+          <End Role="catTipoOperadora" Type="Self.catTipoOperadora" Multiplicity="0..1" />
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catTipoOperadora">
+              <PropertyRef Name="ClaveTipoOperadoraID" />
+            </Principal>
+            <Dependent Role="catOperadoras">
+              <PropertyRef Name="ClaveTipoOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catProveedores_catTipoProveedor">
+          <End Role="catTipoProveedor" Type="Self.catTipoProveedor" Multiplicity="0..1" />
+          <End Role="catProveedores" Type="Self.catProveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catTipoProveedor">
+              <PropertyRef Name="ClaveTipoProveedorID" />
+            </Principal>
+            <Dependent Role="catProveedores">
+              <PropertyRef Name="ClaveTipoProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUniNegOper_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="1" />
+          <End Role="catRelUniNegOper" Type="Self.catRelUniNegOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="catRelUniNegOper">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUniNegOper_catUnidadNegocio">
+          <End Role="tblUnidadNegocio" Type="Self.tblUnidadNegocio" Multiplicity="1" />
+          <End Role="catRelUniNegOper" Type="Self.catRelUniNegOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUnidadNegocio">
+              <PropertyRef Name="ClaveUnidadNegocioID" />
+            </Principal>
+            <Dependent Role="catRelUniNegOper">
+              <PropertyRef Name="ClaveUnidadNegocioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUsuOper_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="1" />
+          <End Role="catRelUsuOper" Type="Self.catRelUsuOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="catRelUsuOper">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUsuOper_tblUsuarios">
+          <End Role="tblUsuarios" Type="Self.tblUsuarios" Multiplicity="1" />
+          <End Role="catRelUsuOper" Type="Self.catRelUsuOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuarios">
+              <PropertyRef Name="ClaveUsuarioID" />
+            </Principal>
+            <Dependent Role="catRelUsuOper">
+              <PropertyRef Name="ClaveUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArchivos_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="0..1" />
+          <End Role="tblInventarioArchivos" Type="Self.tblInventarioArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="tblInventarioArchivos">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DEV_StagingModelStoreContainer">
+          <EntitySet Name="catClavesMovimientos" EntityType="Self.catClavesMovimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catOperadoras" EntityType="Self.catOperadoras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catProveedores" EntityType="Self.catProveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catRelUniNegOper" EntityType="Self.catRelUniNegOper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catRelUsuOper" EntityType="Self.catRelUsuOper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catTipoOperadora" EntityType="Self.catTipoOperadora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catTipoProveedor" EntityType="Self.catTipoProveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDiasFestivos" EntityType="Self.tblDiasFestivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInventarioArchivos" EntityType="Self.tblInventarioArchivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogCarga" EntityType="Self.tblLogCarga" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUnidadNegocio" EntityType="Self.tblUnidadNegocio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catDivisas" EntityType="Self.catDivisas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catDivisas].[ClaveDivisa] AS [ClaveDivisa], 
+    [catDivisas].[Descripcion] AS [Descripcion], 
+    [catDivisas].[Abreviacion] AS [Abreviacion], 
+    [catDivisas].[ClaveMonedaID] AS [ClaveMonedaID], 
+    [catDivisas].[ClaveCovaf] AS [ClaveCovaf], 
+    [catDivisas].[DenBancoDI] AS [DenBancoDI], 
+    [catDivisas].[DenCompIDI] AS [DenCompIDI]
+    FROM [dbo].[catDivisas] AS [catDivisas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catFondos" EntityType="Self.catFondos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catFondos].[ClaveFondo] AS [ClaveFondo], 
+    [catFondos].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [catFondos].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [catFondos].[UsuarioID] AS [UsuarioID], 
+    [catFondos].[Fecha] AS [Fecha]
+    FROM [dbo].[catFondos] AS [catFondos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catFondos_Test" EntityType="Self.catFondos_Test" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catFondos_Test].[ClaveFondoID] AS [ClaveFondoID], 
+    [catFondos_Test].[FondoDescripcion] AS [FondoDescripcion], 
+    [catFondos_Test].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [catFondos_Test].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [catFondos_Test].[UsuarioID] AS [UsuarioID], 
+    [catFondos_Test].[Fecha] AS [Fecha]
+    FROM [dbo].[catFondos_Test] AS [catFondos_Test]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catFondoSeries" EntityType="Self.catFondoSeries" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catFondoSeries].[FondoSerieID] AS [FondoSerieID], 
+    [catFondoSeries].[ClaveFondo] AS [ClaveFondo], 
+    [catFondoSeries].[ClaveSerie] AS [ClaveSerie], 
+    [catFondoSeries].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [catFondoSeries].[UsuarioID] AS [UsuarioID], 
+    [catFondoSeries].[Fecha] AS [Fecha]
+    FROM [dbo].[catFondoSeries] AS [catFondoSeries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catPaises" EntityType="Self.catPaises" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catPaises].[ClavePais] AS [ClavePais], 
+    [catPaises].[ClaveANSI] AS [ClaveANSI], 
+    [catPaises].[Descripcion] AS [Descripcion]
+    FROM [dbo].[catPaises] AS [catPaises]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catTipoAIMSExcedentes" EntityType="Self.catTipoAIMSExcedentes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catTipoAIMSExcedentes].[ClaveTipoAIMSExcedentes] AS [ClaveTipoAIMSExcedentes], 
+    [catTipoAIMSExcedentes].[Descripcion] AS [Descripcion], 
+    [catTipoAIMSExcedentes].[Sub_Cta] AS [Sub_Cta]
+    FROM [dbo].[catTipoAIMSExcedentes] AS [catTipoAIMSExcedentes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catTipoAmortCupones" EntityType="Self.catTipoAmortCupones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catTipoAmortCupones].[catTipoAmortCupon] AS [catTipoAmortCupon], 
+    [catTipoAmortCupones].[Descripcion] AS [Descripcion], 
+    [catTipoAmortCupones].[Sub_Cta] AS [Sub_Cta]
+    FROM [dbo].[catTipoAmortCupones] AS [catTipoAmortCupones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catTipoDEPBMX" EntityType="Self.catTipoDEPBMX" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catTipoDEPBMX].[ClaveTipoDEPBMX] AS [ClaveTipoDEPBMX], 
+    [catTipoDEPBMX].[Descripcion] AS [Descripcion], 
+    [catTipoDEPBMX].[Tasa] AS [Tasa]
+    FROM [dbo].[catTipoDEPBMX] AS [catTipoDEPBMX]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="catTipoDividendos" EntityType="Self.catTipoDividendos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [catTipoDividendos].[ClaveTipoDividendo] AS [ClaveTipoDividendo], 
+    [catTipoDividendos].[Descripcion] AS [Descripcion], 
+    [catTipoDividendos].[Sub_Cta_1302] AS [Sub_Cta_1302], 
+    [catTipoDividendos].[Sub_Cta_5131] AS [Sub_Cta_5131], 
+    [catTipoDividendos].[ClaveTipoDividendoCONSAR] AS [ClaveTipoDividendoCONSAR]
+    FROM [dbo].[catTipoDividendos] AS [catTipoDividendos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCargaCartera" EntityType="Self.tblCargaCartera" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCargaCartera].[AreaID] AS [AreaID], 
+    [tblCargaCartera].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [tblCargaCartera].[TipoInversion] AS [TipoInversion], 
+    [tblCargaCartera].[ClaveFondo] AS [ClaveFondo], 
+    [tblCargaCartera].[ClaveSerie] AS [ClaveSerie], 
+    [tblCargaCartera].[TV] AS [TV], 
+    [tblCargaCartera].[Emisora] AS [Emisora], 
+    [tblCargaCartera].[Serie] AS [Serie], 
+    [tblCargaCartera].[TitulosIniciales] AS [TitulosIniciales], 
+    [tblCargaCartera].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [tblCargaCartera].[UsuarioID] AS [UsuarioID], 
+    [tblCargaCartera].[FechaOper] AS [FechaOper]
+    FROM [dbo].[tblCargaCartera] AS [tblCargaCartera]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCargaDA" EntityType="Self.tblCargaDA" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCargaDA].[Derecho] AS [Derecho], 
+    [tblCargaDA].[Portafolio] AS [Portafolio], 
+    [tblCargaDA].[EmisoraSerie] AS [EmisoraSerie], 
+    [tblCargaDA].[Posicion] AS [Posicion], 
+    [tblCargaDA].[Precio] AS [Precio], 
+    [tblCargaDA].[ImporteBruto] AS [ImporteBruto], 
+    [tblCargaDA].[Impuesto] AS [Impuesto], 
+    [tblCargaDA].[PorcentajePosicion] AS [PorcentajePosicion], 
+    [tblCargaDA].[Liquidacion] AS [Liquidacion], 
+    [tblCargaDA].[ImporteInicialNeto] AS [ImporteInicialNeto]
+    FROM [dbo].[tblCargaDA] AS [tblCargaDA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCargaMV" EntityType="Self.tblCargaMV" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCargaMV].[CveFondo] AS [CveFondo], 
+    [tblCargaMV].[CveMdo] AS [CveMdo], 
+    [tblCargaMV].[CveGpo] AS [CveGpo], 
+    [tblCargaMV].[CveInst] AS [CveInst], 
+    [tblCargaMV].[Isin] AS [Isin], 
+    [tblCargaMV].[CveBmv] AS [CveBmv], 
+    [tblCargaMV].[Emisora] AS [Emisora], 
+    [tblCargaMV].[Serie] AS [Serie], 
+    [tblCargaMV].[FecOper] AS [FecOper], 
+    [tblCargaMV].[FecLiq] AS [FecLiq], 
+    [tblCargaMV].[CveMov] AS [CveMov], 
+    [tblCargaMV].[CveLiq] AS [CveLiq], 
+    [tblCargaMV].[CveTen] AS [CveTen], 
+    [tblCargaMV].[CveCov] AS [CveCov], 
+    [tblCargaMV].[MovCnbv] AS [MovCnbv], 
+    [tblCargaMV].[CveProv] AS [CveProv], 
+    [tblCargaMV].[Plazo] AS [Plazo], 
+    [tblCargaMV].[Tasa] AS [Tasa], 
+    [tblCargaMV].[Titulos] AS [Titulos], 
+    [tblCargaMV].[Tcambio] AS [Tcambio], 
+    [tblCargaMV].[Pactado] AS [Pactado], 
+    [tblCargaMV].[ImpBruto] AS [ImpBruto], 
+    [tblCargaMV].[ImpInt] AS [ImpInt], 
+    [tblCargaMV].[ImpComs] AS [ImpComs], 
+    [tblCargaMV].[ImpIva] AS [ImpIva], 
+    [tblCargaMV].[ImpIsr] AS [ImpIsr], 
+    [tblCargaMV].[Pais] AS [Pais], 
+    [tblCargaMV].[Moneda] AS [Moneda], 
+    [tblCargaMV].[Hora] AS [Hora], 
+    [tblCargaMV].[TasaFv] AS [TasaFv], 
+    [tblCargaMV].[TasaRef] AS [TasaRef], 
+    [tblCargaMV].[Aforo] AS [Aforo], 
+    [tblCargaMV].[FolFront] AS [FolFront], 
+    [tblCargaMV].[CveBrok] AS [CveBrok], 
+    [tblCargaMV].[ComBrok] AS [ComBrok], 
+    [tblCargaMV].[IvaBrok] AS [IvaBrok], 
+    [tblCargaMV].[PrecFdos] AS [PrecFdos], 
+    [tblCargaMV].[MdoPrim] AS [MdoPrim], 
+    [tblCargaMV].[MedioConc] AS [MedioConc], 
+    [tblCargaMV].[CtoUnit] AS [CtoUnit]
+    FROM [dbo].[tblCargaMV] AS [tblCargaMV]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCargaVector" EntityType="Self.tblCargaVector" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCargaVector].[AreaID] AS [AreaID], 
+    [tblCargaVector].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [tblCargaVector].[TipoReg] AS [TipoReg], 
+    [tblCargaVector].[TipoMercado] AS [TipoMercado], 
+    [tblCargaVector].[FechaOper] AS [FechaOper], 
+    [tblCargaVector].[TV] AS [TV], 
+    [tblCargaVector].[Emisora] AS [Emisora], 
+    [tblCargaVector].[Serie] AS [Serie], 
+    [tblCargaVector].[PrecioSucio] AS [PrecioSucio], 
+    [tblCargaVector].[PrecioLimpio] AS [PrecioLimpio], 
+    [tblCargaVector].[Interes] AS [Interes], 
+    [tblCargaVector].[CveProveedor] AS [CveProveedor], 
+    [tblCargaVector].[TipoEnvio] AS [TipoEnvio], 
+    [tblCargaVector].[DiasxVencer] AS [DiasxVencer], 
+    [tblCargaVector].[TasaDescto] AS [TasaDescto]
+    FROM [dbo].[tblCargaVector] AS [tblCargaVector]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_catOperadoras_catProveedores" Association="Self.FK_catOperadoras_catProveedores">
+            <End Role="catProveedores" EntitySet="catProveedores" />
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catOperadoras_catTipoOperadora" Association="Self.FK_catOperadoras_catTipoOperadora">
+            <End Role="catTipoOperadora" EntitySet="catTipoOperadora" />
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catProveedores_catTipoProveedor" Association="Self.FK_catProveedores_catTipoProveedor">
+            <End Role="catTipoProveedor" EntitySet="catTipoProveedor" />
+            <End Role="catProveedores" EntitySet="catProveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUniNegOper_catOperadoras" Association="Self.FK_catRelUniNegOper_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="catRelUniNegOper" EntitySet="catRelUniNegOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUniNegOper_catUnidadNegocio" Association="Self.FK_catRelUniNegOper_catUnidadNegocio">
+            <End Role="tblUnidadNegocio" EntitySet="tblUnidadNegocio" />
+            <End Role="catRelUniNegOper" EntitySet="catRelUniNegOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUsuOper_catOperadoras" Association="Self.FK_catRelUsuOper_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="catRelUsuOper" EntitySet="catRelUsuOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUsuOper_tblUsuarios" Association="Self.FK_catRelUsuOper_tblUsuarios">
+            <End Role="tblUsuarios" EntitySet="tblUsuarios" />
+            <End Role="catRelUsuOper" EntitySet="catRelUsuOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArchivos_catOperadoras" Association="Self.FK_InventarioArchivos_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="tblInventarioArchivos" EntitySet="tblInventarioArchivos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_StagingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="catClavesMovimientos">
+          <Key>
+            <PropertyRef Name="ClaveMovimientoID" />
+          </Key>
+          <Property Name="ClaveMovimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveTen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveMovDescripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveMovimientoID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catOperadoras">
+          <Key>
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveOperadora" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveTipoOperadoraID" Type="Int32" />
+          <Property Name="ClaveProveedorID" Type="Int32" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="catProveedores" Relationship="Self.FK_catOperadoras_catProveedores" FromRole="catOperadoras" ToRole="catProveedores" />
+          <NavigationProperty Name="catTipoOperadora" Relationship="Self.FK_catOperadoras_catTipoOperadora" FromRole="catOperadoras" ToRole="catTipoOperadora" />
+          <NavigationProperty Name="catRelUniNegOper" Relationship="Self.FK_catRelUniNegOper_catOperadoras" FromRole="catOperadoras" ToRole="catRelUniNegOper" />
+          <NavigationProperty Name="catRelUsuOper" Relationship="Self.FK_catRelUsuOper_catOperadoras" FromRole="catOperadoras" ToRole="catRelUsuOper" />
+          <NavigationProperty Name="tblInventarioArchivos" Relationship="Self.FK_InventarioArchivos_catOperadoras" FromRole="catOperadoras" ToRole="tblInventarioArchivos" />
+        </EntityType>
+        <EntityType Name="catProveedores">
+          <Key>
+            <PropertyRef Name="ClaveProveedorID" />
+          </Key>
+          <Property Name="ClaveProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveProveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveTipoProveedorID" Type="Int32" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="catOperadoras" Relationship="Self.FK_catOperadoras_catProveedores" FromRole="catProveedores" ToRole="catOperadoras" />
+          <NavigationProperty Name="catTipoProveedor" Relationship="Self.FK_catProveedores_catTipoProveedor" FromRole="catProveedores" ToRole="catTipoProveedor" />
+        </EntityType>
+        <EntityType Name="catRelUniNegOper">
+          <Key>
+            <PropertyRef Name="ClaveUnidadNegocioOperadoraID" />
+          </Key>
+          <Property Name="ClaveUnidadNegocioOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveUnidadNegocioID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="catOperadoras" Relationship="Self.FK_catRelUniNegOper_catOperadoras" FromRole="catRelUniNegOper" ToRole="catOperadoras" />
+          <NavigationProperty Name="tblUnidadNegocio" Relationship="Self.FK_catRelUniNegOper_catUnidadNegocio" FromRole="catRelUniNegOper" ToRole="tblUnidadNegocio" />
+        </EntityType>
+        <EntityType Name="catRelUsuOper">
+          <Key>
+            <PropertyRef Name="ClaveUsuarioOperadora" />
+          </Key>
+          <Property Name="ClaveUsuarioOperadora" Type="Int32" Nullable="false" />
+          <Property Name="ClaveUsuarioID" Type="Guid" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="catOperadoras" Relationship="Self.FK_catRelUsuOper_catOperadoras" FromRole="catRelUsuOper" ToRole="catOperadoras" />
+          <NavigationProperty Name="tblUsuarios" Relationship="Self.FK_catRelUsuOper_tblUsuarios" FromRole="catRelUsuOper" ToRole="tblUsuarios" />
+        </EntityType>
+        <EntityType Name="catTipoOperadora">
+          <Key>
+            <PropertyRef Name="ClaveTipoOperadoraID" />
+          </Key>
+          <Property Name="ClaveTipoOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveTipoOperadora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="catOperadoras" Relationship="Self.FK_catOperadoras_catTipoOperadora" FromRole="catTipoOperadora" ToRole="catOperadoras" />
+        </EntityType>
+        <EntityType Name="catTipoProveedor">
+          <Key>
+            <PropertyRef Name="ClaveTipoProveedorID" />
+          </Key>
+          <Property Name="ClaveTipoProveedorID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveTipoProveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="catProveedores" Relationship="Self.FK_catProveedores_catTipoProveedor" FromRole="catTipoProveedor" ToRole="catProveedores" />
+        </EntityType>
+        <EntityType Name="tblDiasFestivos">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="ClavePaisID" />
+          </Key>
+          <Property Name="ClaveDiaFestivo" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClavePaisID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblInventarioArchivos">
+          <Key>
+            <PropertyRef Name="InventarioArchivos" />
+          </Key>
+          <Property Name="InventarioArchivos" Type="Int32" Nullable="false" />
+          <Property Name="EtapaID" Type="Int32" />
+          <Property Name="UnidadDeNegocioID" Type="Int32" />
+          <Property Name="Proceso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="NombreArchivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Ruta" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="Accion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Regulatorio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Requisitos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Historico" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Interaccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tamano" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusCargaID" Type="Int32" />
+          <Property Name="ClaveOperadoraID" Type="Int32" />
+          <NavigationProperty Name="catOperadoras" Relationship="Self.FK_InventarioArchivos_catOperadoras" FromRole="tblInventarioArchivos" ToRole="catOperadoras" />
+        </EntityType>
+        <EntityType Name="tblLogCarga">
+          <Key>
+            <PropertyRef Name="CargaDeInsumoID" />
+          </Key>
+          <Property Name="CargaDeInsumoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoInsumo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RutaOrigen" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Archivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusCarga" Type="Boolean" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblUnidadNegocio">
+          <Key>
+            <PropertyRef Name="ClaveUnidadNegocioID" />
+          </Key>
+          <Property Name="ClaveUnidadNegocioID" Type="Int32" Nullable="false" />
+          <Property Name="UnidadNegocio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="catRelUniNegOper" Relationship="Self.FK_catRelUniNegOper_catUnidadNegocio" FromRole="tblUnidadNegocio" ToRole="catRelUniNegOper" />
+        </EntityType>
+        <EntityType Name="tblUsuarios">
+          <Key>
+            <PropertyRef Name="ClaveUsuarioID" />
+          </Key>
+          <Property Name="ClaveUsuarioID" Type="Guid" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="catRelUsuOper" Relationship="Self.FK_catRelUsuOper_tblUsuarios" FromRole="tblUsuarios" ToRole="catRelUsuOper" />
+        </EntityType>
+        <EntityType Name="catDivisas">
+          <Key>
+            <PropertyRef Name="ClaveDivisa" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="Abreviacion" />
+          </Key>
+          <Property Name="ClaveDivisa" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Abreviacion" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ClaveMonedaID" Type="Int32" />
+          <Property Name="ClaveCovaf" Type="Int32" />
+          <Property Name="DenBancoDI" Type="Int32" />
+          <Property Name="DenCompIDI" Type="Int32" />
+        </EntityType>
+        <EntityType Name="catFondos">
+          <Key>
+            <PropertyRef Name="ClaveFondo" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveFondo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="catFondos_Test">
+          <Key>
+            <PropertyRef Name="ClaveFondoID" />
+            <PropertyRef Name="FondoDescripcion" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="ClaveFondoID" Type="Int32" Nullable="false" />
+          <Property Name="FondoDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="catFondoSeries">
+          <Key>
+            <PropertyRef Name="FondoSerieID" />
+            <PropertyRef Name="ClaveFondo" />
+          </Key>
+          <Property Name="FondoSerieID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveFondo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaveSerie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="catPaises">
+          <Key>
+            <PropertyRef Name="ClavePais" />
+            <PropertyRef Name="ClaveANSI" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClavePais" Type="Int32" Nullable="false" />
+          <Property Name="ClaveANSI" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catTipoAIMSExcedentes">
+          <Key>
+            <PropertyRef Name="ClaveTipoAIMSExcedentes" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoAIMSExcedentes" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sub_Cta" Type="Int32" />
+        </EntityType>
+        <EntityType Name="catTipoAmortCupones">
+          <Key>
+            <PropertyRef Name="catTipoAmortCupon" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="catTipoAmortCupon" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sub_Cta" Type="Int32" />
+        </EntityType>
+        <EntityType Name="catTipoDEPBMX">
+          <Key>
+            <PropertyRef Name="ClaveTipoDEPBMX" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoDEPBMX" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Tasa" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="catTipoDividendos">
+          <Key>
+            <PropertyRef Name="ClaveTipoDividendo" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="ClaveTipoDividendo" Type="Int16" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sub_Cta_1302" Type="Int32" />
+          <Property Name="Sub_Cta_5131" Type="Int32" />
+          <Property Name="ClaveTipoDividendoCONSAR" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblCargaCartera">
+          <Key>
+            <PropertyRef Name="TV" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="ClaveOperadoraID" Type="Int32" />
+          <Property Name="TipoInversion" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveFondo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveSerie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TitulosIniciales" Type="Decimal" Precision="15" Scale="6" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblCargaDA">
+          <Key>
+            <PropertyRef Name="Derecho" />
+            <PropertyRef Name="Portafolio" />
+            <PropertyRef Name="EmisoraSerie" />
+            <PropertyRef Name="Posicion" />
+            <PropertyRef Name="Precio" />
+            <PropertyRef Name="ImporteBruto" />
+            <PropertyRef Name="Impuesto" />
+            <PropertyRef Name="PorcentajePosicion" />
+            <PropertyRef Name="Liquidacion" />
+            <PropertyRef Name="ImporteInicialNeto" />
+          </Key>
+          <Property Name="Derecho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Portafolio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmisoraSerie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Posicion" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="ImporteBruto" Type="Double" Nullable="false" />
+          <Property Name="Impuesto" Type="Int32" Nullable="false" />
+          <Property Name="PorcentajePosicion" Type="Int32" Nullable="false" />
+          <Property Name="Liquidacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ImporteInicialNeto" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCargaMV">
+          <Key>
+            <PropertyRef Name="CveFondo" />
+            <PropertyRef Name="Isin" />
+            <PropertyRef Name="CveBmv" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="FecOper" />
+            <PropertyRef Name="FecLiq" />
+            <PropertyRef Name="CveMov" />
+            <PropertyRef Name="CveLiq" />
+            <PropertyRef Name="CveTen" />
+            <PropertyRef Name="CveProv" />
+            <PropertyRef Name="Plazo" />
+            <PropertyRef Name="Tasa" />
+            <PropertyRef Name="Titulos" />
+            <PropertyRef Name="Tcambio" />
+            <PropertyRef Name="Pactado" />
+            <PropertyRef Name="ImpBruto" />
+            <PropertyRef Name="ImpInt" />
+            <PropertyRef Name="ImpComs" />
+            <PropertyRef Name="ImpIva" />
+            <PropertyRef Name="Pais" />
+            <PropertyRef Name="Moneda" />
+            <PropertyRef Name="Hora" />
+            <PropertyRef Name="TasaFv" />
+          </Key>
+          <Property Name="CveFondo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveMdo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CveGpo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CveInst" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Isin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveBmv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emisora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Serie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FecOper" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FecLiq" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveMov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveLiq" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveTen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CveCov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MovCnbv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CveProv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Plazo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tasa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tcambio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pactado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImpBruto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImpInt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImpComs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImpIva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImpIsr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Moneda" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TasaFv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TasaRef" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aforo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FolFront" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CveBrok" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ComBrok" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IvaBrok" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrecFdos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MdoPrim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MedioConc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CtoUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCargaVector">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoReg" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="TipoMercado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioSucio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioLimpio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Interes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CveProveedor" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="TipoEnvio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DiasxVencer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TasaDescto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_catOperadoras_catProveedores">
+          <End Role="catProveedores" Type="Self.catProveedores" Multiplicity="0..1" />
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catProveedores">
+              <PropertyRef Name="ClaveProveedorID" />
+            </Principal>
+            <Dependent Role="catOperadoras">
+              <PropertyRef Name="ClaveProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catOperadoras_catTipoOperadora">
+          <End Role="catTipoOperadora" Type="Self.catTipoOperadora" Multiplicity="0..1" />
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catTipoOperadora">
+              <PropertyRef Name="ClaveTipoOperadoraID" />
+            </Principal>
+            <Dependent Role="catOperadoras">
+              <PropertyRef Name="ClaveTipoOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUniNegOper_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="1" />
+          <End Role="catRelUniNegOper" Type="Self.catRelUniNegOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="catRelUniNegOper">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUsuOper_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="1" />
+          <End Role="catRelUsuOper" Type="Self.catRelUsuOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="catRelUsuOper">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioArchivos_catOperadoras">
+          <End Role="catOperadoras" Type="Self.catOperadoras" Multiplicity="0..1" />
+          <End Role="tblInventarioArchivos" Type="Self.tblInventarioArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catOperadoras">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Principal>
+            <Dependent Role="tblInventarioArchivos">
+              <PropertyRef Name="ClaveOperadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catProveedores_catTipoProveedor">
+          <End Role="catTipoProveedor" Type="Self.catTipoProveedor" Multiplicity="0..1" />
+          <End Role="catProveedores" Type="Self.catProveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catTipoProveedor">
+              <PropertyRef Name="ClaveTipoProveedorID" />
+            </Principal>
+            <Dependent Role="catProveedores">
+              <PropertyRef Name="ClaveTipoProveedorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUniNegOper_catUnidadNegocio">
+          <End Role="tblUnidadNegocio" Type="Self.tblUnidadNegocio" Multiplicity="1" />
+          <End Role="catRelUniNegOper" Type="Self.catRelUniNegOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUnidadNegocio">
+              <PropertyRef Name="ClaveUnidadNegocioID" />
+            </Principal>
+            <Dependent Role="catRelUniNegOper">
+              <PropertyRef Name="ClaveUnidadNegocioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_catRelUsuOper_tblUsuarios">
+          <End Role="tblUsuarios" Type="Self.tblUsuarios" Multiplicity="1" />
+          <End Role="catRelUsuOper" Type="Self.catRelUsuOper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsuarios">
+              <PropertyRef Name="ClaveUsuarioID" />
+            </Principal>
+            <Dependent Role="catRelUsuOper">
+              <PropertyRef Name="ClaveUsuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DEV_StagingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="catClavesMovimientos" EntityType="Self.catClavesMovimientos" />
+          <EntitySet Name="catOperadoras" EntityType="Self.catOperadoras" />
+          <EntitySet Name="catProveedores" EntityType="Self.catProveedores" />
+          <EntitySet Name="catRelUniNegOper" EntityType="Self.catRelUniNegOper" />
+          <EntitySet Name="catRelUsuOper" EntityType="Self.catRelUsuOper" />
+          <EntitySet Name="catTipoOperadora" EntityType="Self.catTipoOperadora" />
+          <EntitySet Name="catTipoProveedor" EntityType="Self.catTipoProveedor" />
+          <EntitySet Name="tblDiasFestivos" EntityType="Self.tblDiasFestivos" />
+          <EntitySet Name="tblInventarioArchivos" EntityType="Self.tblInventarioArchivos" />
+          <EntitySet Name="tblLogCarga" EntityType="Self.tblLogCarga" />
+          <EntitySet Name="tblUnidadNegocio" EntityType="Self.tblUnidadNegocio" />
+          <EntitySet Name="tblUsuarios" EntityType="Self.tblUsuarios" />
+          <EntitySet Name="catDivisas" EntityType="Self.catDivisas" />
+          <EntitySet Name="catFondos" EntityType="Self.catFondos" />
+          <EntitySet Name="catFondos_Test" EntityType="Self.catFondos_Test" />
+          <EntitySet Name="catFondoSeries" EntityType="Self.catFondoSeries" />
+          <EntitySet Name="catPaises" EntityType="Self.catPaises" />
+          <EntitySet Name="catTipoAIMSExcedentes" EntityType="Self.catTipoAIMSExcedentes" />
+          <EntitySet Name="catTipoAmortCupones" EntityType="Self.catTipoAmortCupones" />
+          <EntitySet Name="catTipoDEPBMX" EntityType="Self.catTipoDEPBMX" />
+          <EntitySet Name="catTipoDividendos" EntityType="Self.catTipoDividendos" />
+          <EntitySet Name="tblCargaCartera" EntityType="Self.tblCargaCartera" />
+          <EntitySet Name="tblCargaDA" EntityType="Self.tblCargaDA" />
+          <EntitySet Name="tblCargaMV" EntityType="Self.tblCargaMV" />
+          <EntitySet Name="tblCargaVector" EntityType="Self.tblCargaVector" />
+          <AssociationSet Name="FK_catOperadoras_catProveedores" Association="Self.FK_catOperadoras_catProveedores">
+            <End Role="catProveedores" EntitySet="catProveedores" />
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catOperadoras_catTipoOperadora" Association="Self.FK_catOperadoras_catTipoOperadora">
+            <End Role="catTipoOperadora" EntitySet="catTipoOperadora" />
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUniNegOper_catOperadoras" Association="Self.FK_catRelUniNegOper_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="catRelUniNegOper" EntitySet="catRelUniNegOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUsuOper_catOperadoras" Association="Self.FK_catRelUsuOper_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="catRelUsuOper" EntitySet="catRelUsuOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioArchivos_catOperadoras" Association="Self.FK_InventarioArchivos_catOperadoras">
+            <End Role="catOperadoras" EntitySet="catOperadoras" />
+            <End Role="tblInventarioArchivos" EntitySet="tblInventarioArchivos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catProveedores_catTipoProveedor" Association="Self.FK_catProveedores_catTipoProveedor">
+            <End Role="catTipoProveedor" EntitySet="catTipoProveedor" />
+            <End Role="catProveedores" EntitySet="catProveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUniNegOper_catUnidadNegocio" Association="Self.FK_catRelUniNegOper_catUnidadNegocio">
+            <End Role="tblUnidadNegocio" EntitySet="tblUnidadNegocio" />
+            <End Role="catRelUniNegOper" EntitySet="catRelUniNegOper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_catRelUsuOper_tblUsuarios" Association="Self.FK_catRelUsuOper_tblUsuarios">
+            <End Role="tblUsuarios" EntitySet="tblUsuarios" />
+            <End Role="catRelUsuOper" EntitySet="catRelUsuOper" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_StagingModelStoreContainer" CdmEntityContainer="DEV_StagingEntities">
+          <EntitySetMapping Name="catClavesMovimientos">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catClavesMovimientos">
+              <MappingFragment StoreEntitySet="catClavesMovimientos">
+                <ScalarProperty Name="ClaveMovimiento" ColumnName="ClaveMovimiento" />
+                <ScalarProperty Name="ClaveTen" ColumnName="ClaveTen" />
+                <ScalarProperty Name="ClaveMovDescripcion" ColumnName="ClaveMovDescripcion" />
+                <ScalarProperty Name="ClaveMovimientoID" ColumnName="ClaveMovimientoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catOperadoras">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catOperadoras">
+              <MappingFragment StoreEntitySet="catOperadoras">
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="ClaveOperadora" ColumnName="ClaveOperadora" />
+                <ScalarProperty Name="ClaveTipoOperadoraID" ColumnName="ClaveTipoOperadoraID" />
+                <ScalarProperty Name="ClaveProveedorID" ColumnName="ClaveProveedorID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catProveedores">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catProveedores">
+              <MappingFragment StoreEntitySet="catProveedores">
+                <ScalarProperty Name="ClaveProveedorID" ColumnName="ClaveProveedorID" />
+                <ScalarProperty Name="ClaveProveedor" ColumnName="ClaveProveedor" />
+                <ScalarProperty Name="ClaveTipoProveedorID" ColumnName="ClaveTipoProveedorID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catRelUniNegOper">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catRelUniNegOper">
+              <MappingFragment StoreEntitySet="catRelUniNegOper">
+                <ScalarProperty Name="ClaveUnidadNegocioOperadoraID" ColumnName="ClaveUnidadNegocioOperadoraID" />
+                <ScalarProperty Name="ClaveUnidadNegocioID" ColumnName="ClaveUnidadNegocioID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catRelUsuOper">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catRelUsuOper">
+              <MappingFragment StoreEntitySet="catRelUsuOper">
+                <ScalarProperty Name="ClaveUsuarioOperadora" ColumnName="ClaveUsuarioOperadora" />
+                <ScalarProperty Name="ClaveUsuarioID" ColumnName="ClaveUsuarioID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoOperadora">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoOperadora">
+              <MappingFragment StoreEntitySet="catTipoOperadora">
+                <ScalarProperty Name="ClaveTipoOperadoraID" ColumnName="ClaveTipoOperadoraID" />
+                <ScalarProperty Name="ClaveTipoOperadora" ColumnName="ClaveTipoOperadora" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoProveedor">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoProveedor">
+              <MappingFragment StoreEntitySet="catTipoProveedor">
+                <ScalarProperty Name="ClaveTipoProveedorID" ColumnName="ClaveTipoProveedorID" />
+                <ScalarProperty Name="ClaveTipoProveedor" ColumnName="ClaveTipoProveedor" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDiasFestivos">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblDiasFestivos">
+              <MappingFragment StoreEntitySet="tblDiasFestivos">
+                <ScalarProperty Name="ClaveDiaFestivo" ColumnName="ClaveDiaFestivo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ClavePaisID" ColumnName="ClavePaisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblInventarioArchivos">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblInventarioArchivos">
+              <MappingFragment StoreEntitySet="tblInventarioArchivos">
+                <ScalarProperty Name="InventarioArchivos" ColumnName="InventarioArchivos" />
+                <ScalarProperty Name="EtapaID" ColumnName="EtapaID" />
+                <ScalarProperty Name="UnidadDeNegocioID" ColumnName="UnidadDeNegocioID" />
+                <ScalarProperty Name="Proceso" ColumnName="Proceso" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="NombreArchivo" ColumnName="NombreArchivo" />
+                <ScalarProperty Name="Ruta" ColumnName="Ruta" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Regulatorio" ColumnName="Regulatorio" />
+                <ScalarProperty Name="Requisitos" ColumnName="Requisitos" />
+                <ScalarProperty Name="Historico" ColumnName="Historico" />
+                <ScalarProperty Name="Interaccion" ColumnName="Interaccion" />
+                <ScalarProperty Name="Tamano" ColumnName="Tamano" />
+                <ScalarProperty Name="EstatusCargaID" ColumnName="EstatusCargaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLogCarga">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblLogCarga">
+              <MappingFragment StoreEntitySet="tblLogCarga">
+                <ScalarProperty Name="CargaDeInsumoID" ColumnName="CargaDeInsumoID" />
+                <ScalarProperty Name="TipoInsumo" ColumnName="TipoInsumo" />
+                <ScalarProperty Name="RutaOrigen" ColumnName="RutaOrigen" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="EstatusCarga" ColumnName="EstatusCarga" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUnidadNegocio">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblUnidadNegocio">
+              <MappingFragment StoreEntitySet="tblUnidadNegocio">
+                <ScalarProperty Name="ClaveUnidadNegocioID" ColumnName="ClaveUnidadNegocioID" />
+                <ScalarProperty Name="UnidadNegocio" ColumnName="UnidadNegocio" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsuarios">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblUsuarios">
+              <MappingFragment StoreEntitySet="tblUsuarios">
+                <ScalarProperty Name="ClaveUsuarioID" ColumnName="ClaveUsuarioID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catDivisas">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catDivisas">
+              <MappingFragment StoreEntitySet="catDivisas">
+                <ScalarProperty Name="ClaveDivisa" ColumnName="ClaveDivisa" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+                <ScalarProperty Name="ClaveMonedaID" ColumnName="ClaveMonedaID" />
+                <ScalarProperty Name="ClaveCovaf" ColumnName="ClaveCovaf" />
+                <ScalarProperty Name="DenBancoDI" ColumnName="DenBancoDI" />
+                <ScalarProperty Name="DenCompIDI" ColumnName="DenCompIDI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catFondos">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catFondos">
+              <MappingFragment StoreEntitySet="catFondos">
+                <ScalarProperty Name="ClaveFondo" ColumnName="ClaveFondo" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catFondos_Test">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catFondos_Test">
+              <MappingFragment StoreEntitySet="catFondos_Test">
+                <ScalarProperty Name="ClaveFondoID" ColumnName="ClaveFondoID" />
+                <ScalarProperty Name="FondoDescripcion" ColumnName="FondoDescripcion" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catFondoSeries">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catFondoSeries">
+              <MappingFragment StoreEntitySet="catFondoSeries">
+                <ScalarProperty Name="FondoSerieID" ColumnName="FondoSerieID" />
+                <ScalarProperty Name="ClaveFondo" ColumnName="ClaveFondo" />
+                <ScalarProperty Name="ClaveSerie" ColumnName="ClaveSerie" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catPaises">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catPaises">
+              <MappingFragment StoreEntitySet="catPaises">
+                <ScalarProperty Name="ClavePais" ColumnName="ClavePais" />
+                <ScalarProperty Name="ClaveANSI" ColumnName="ClaveANSI" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoAIMSExcedentes">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoAIMSExcedentes">
+              <MappingFragment StoreEntitySet="catTipoAIMSExcedentes">
+                <ScalarProperty Name="ClaveTipoAIMSExcedentes" ColumnName="ClaveTipoAIMSExcedentes" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Sub_Cta" ColumnName="Sub_Cta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoAmortCupones">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoAmortCupones">
+              <MappingFragment StoreEntitySet="catTipoAmortCupones">
+                <ScalarProperty Name="catTipoAmortCupon" ColumnName="catTipoAmortCupon" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Sub_Cta" ColumnName="Sub_Cta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoDEPBMX">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoDEPBMX">
+              <MappingFragment StoreEntitySet="catTipoDEPBMX">
+                <ScalarProperty Name="ClaveTipoDEPBMX" ColumnName="ClaveTipoDEPBMX" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Tasa" ColumnName="Tasa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catTipoDividendos">
+            <EntityTypeMapping TypeName="DEV_StagingModel.catTipoDividendos">
+              <MappingFragment StoreEntitySet="catTipoDividendos">
+                <ScalarProperty Name="ClaveTipoDividendo" ColumnName="ClaveTipoDividendo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Sub_Cta_1302" ColumnName="Sub_Cta_1302" />
+                <ScalarProperty Name="Sub_Cta_5131" ColumnName="Sub_Cta_5131" />
+                <ScalarProperty Name="ClaveTipoDividendoCONSAR" ColumnName="ClaveTipoDividendoCONSAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCargaCartera">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblCargaCartera">
+              <MappingFragment StoreEntitySet="tblCargaCartera">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="TipoInversion" ColumnName="TipoInversion" />
+                <ScalarProperty Name="ClaveFondo" ColumnName="ClaveFondo" />
+                <ScalarProperty Name="ClaveSerie" ColumnName="ClaveSerie" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="TitulosIniciales" ColumnName="TitulosIniciales" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCargaDA">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblCargaDA">
+              <MappingFragment StoreEntitySet="tblCargaDA">
+                <ScalarProperty Name="Derecho" ColumnName="Derecho" />
+                <ScalarProperty Name="Portafolio" ColumnName="Portafolio" />
+                <ScalarProperty Name="EmisoraSerie" ColumnName="EmisoraSerie" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ImporteBruto" ColumnName="ImporteBruto" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="PorcentajePosicion" ColumnName="PorcentajePosicion" />
+                <ScalarProperty Name="Liquidacion" ColumnName="Liquidacion" />
+                <ScalarProperty Name="ImporteInicialNeto" ColumnName="ImporteInicialNeto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCargaMV">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblCargaMV">
+              <MappingFragment StoreEntitySet="tblCargaMV">
+                <ScalarProperty Name="CveFondo" ColumnName="CveFondo" />
+                <ScalarProperty Name="CveMdo" ColumnName="CveMdo" />
+                <ScalarProperty Name="CveGpo" ColumnName="CveGpo" />
+                <ScalarProperty Name="CveInst" ColumnName="CveInst" />
+                <ScalarProperty Name="Isin" ColumnName="Isin" />
+                <ScalarProperty Name="CveBmv" ColumnName="CveBmv" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="FecOper" ColumnName="FecOper" />
+                <ScalarProperty Name="FecLiq" ColumnName="FecLiq" />
+                <ScalarProperty Name="CveMov" ColumnName="CveMov" />
+                <ScalarProperty Name="CveLiq" ColumnName="CveLiq" />
+                <ScalarProperty Name="CveTen" ColumnName="CveTen" />
+                <ScalarProperty Name="CveCov" ColumnName="CveCov" />
+                <ScalarProperty Name="MovCnbv" ColumnName="MovCnbv" />
+                <ScalarProperty Name="CveProv" ColumnName="CveProv" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="Tasa" ColumnName="Tasa" />
+                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
+                <ScalarProperty Name="Tcambio" ColumnName="Tcambio" />
+                <ScalarProperty Name="Pactado" ColumnName="Pactado" />
+                <ScalarProperty Name="ImpBruto" ColumnName="ImpBruto" />
+                <ScalarProperty Name="ImpInt" ColumnName="ImpInt" />
+                <ScalarProperty Name="ImpComs" ColumnName="ImpComs" />
+                <ScalarProperty Name="ImpIva" ColumnName="ImpIva" />
+                <ScalarProperty Name="ImpIsr" ColumnName="ImpIsr" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="TasaFv" ColumnName="TasaFv" />
+                <ScalarProperty Name="TasaRef" ColumnName="TasaRef" />
+                <ScalarProperty Name="Aforo" ColumnName="Aforo" />
+                <ScalarProperty Name="FolFront" ColumnName="FolFront" />
+                <ScalarProperty Name="CveBrok" ColumnName="CveBrok" />
+                <ScalarProperty Name="ComBrok" ColumnName="ComBrok" />
+                <ScalarProperty Name="IvaBrok" ColumnName="IvaBrok" />
+                <ScalarProperty Name="PrecFdos" ColumnName="PrecFdos" />
+                <ScalarProperty Name="MdoPrim" ColumnName="MdoPrim" />
+                <ScalarProperty Name="MedioConc" ColumnName="MedioConc" />
+                <ScalarProperty Name="CtoUnit" ColumnName="CtoUnit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCargaVector">
+            <EntityTypeMapping TypeName="DEV_StagingModel.tblCargaVector">
+              <MappingFragment StoreEntitySet="tblCargaVector">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="TipoReg" ColumnName="TipoReg" />
+                <ScalarProperty Name="TipoMercado" ColumnName="TipoMercado" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="PrecioSucio" ColumnName="PrecioSucio" />
+                <ScalarProperty Name="PrecioLimpio" ColumnName="PrecioLimpio" />
+                <ScalarProperty Name="Interes" ColumnName="Interes" />
+                <ScalarProperty Name="CveProveedor" ColumnName="CveProveedor" />
+                <ScalarProperty Name="TipoEnvio" ColumnName="TipoEnvio" />
+                <ScalarProperty Name="DiasxVencer" ColumnName="DiasxVencer" />
+                <ScalarProperty Name="TasaDescto" ColumnName="TasaDescto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

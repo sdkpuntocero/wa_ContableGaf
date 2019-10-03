@@ -1,0 +1,813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DEV_CalcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.tbl_TCFix' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tbl_TCFix">
+          <Key>
+            <PropertyRef Name="TCFixID" />
+          </Key>
+          <Property Name="TCFixID" Type="int" Nullable="false" />
+          <Property Name="TCFix" Type="numeric" Precision="7" Scale="4" />
+          <Property Name="FechaOperacion" Type="date" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.tblCartera' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblCartera">
+          <Key>
+            <PropertyRef Name="TV" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="AreaID" Type="int" />
+          <Property Name="ClaveOperadoraID" Type="int" />
+          <Property Name="TipoInversion" Type="varchar" MaxLength="7" />
+          <Property Name="ClaveFondo" Type="varchar" MaxLength="15" />
+          <Property Name="ClaveSerie" Type="varchar" MaxLength="7" />
+          <Property Name="TV" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Precios" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="TitulosIniciales" Type="float" />
+          <Property Name="Costo" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="PlusMin" Type="numeric" Precision="18" Scale="6" />
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="EstatusReprocesoID" Type="int" />
+          <Property Name="OrdenReproceso" Type="int" />
+          <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="tblDA">
+          <Key>
+            <PropertyRef Name="DerechosAmortizacionesID" />
+          </Key>
+          <Property Name="AreaID" Type="int" />
+          <Property Name="ClaveOperadoraID" Type="int" />
+          <Property Name="Derecho" Type="varchar" MaxLength="50" />
+          <Property Name="Portafolio" Type="varchar" MaxLength="50" />
+          <Property Name="TV" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Posicion" Type="float" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="ImporteBruto" Type="float" />
+          <Property Name="Impuesto" Type="float" />
+          <Property Name="PorcentajePosicion" Type="float" />
+          <Property Name="Liquidacion" Type="date" />
+          <Property Name="ImporteInicialNeto" Type="float" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="DerechosAmortizacionesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDE">
+          <Key>
+            <PropertyRef Name="DEThroughID" />
+          </Key>
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="CveFondo" Type="int" />
+          <Property Name="CveBmv" Type="varchar" MaxLength="15" />
+          <Property Name="Emisora" Type="varchar" MaxLength="15" />
+          <Property Name="Serie" Type="varchar" MaxLength="15" />
+          <Property Name="PaisTrans" Type="varchar" MaxLength="5" />
+          <Property Name="MonedaTrans" Type="varchar" MaxLength="5" />
+          <Property Name="ImpMonOrig" Type="money" />
+          <Property Name="TipoCambio" Type="money" />
+          <Property Name="Pactado" Type="varchar" MaxLength="5" />
+          <Property Name="DivGrex" Type="varchar" MaxLength="5" />
+          <Property Name="IsrFecId" Type="varchar" MaxLength="64" />
+          <Property Name="IsrMonId" Type="varchar" MaxLength="65" />
+          <Property Name="IsrTcId" Type="varchar" MaxLength="66" />
+          <Property Name="IsrPactId" Type="varchar" MaxLength="67" />
+          <Property Name="IsrImpId" Type="varchar" MaxLength="68" />
+          <Property Name="IsrFecPro" Type="varchar" MaxLength="69" />
+          <Property Name="IsrMonPro" Type="varchar" MaxLength="70" />
+          <Property Name="IsrTcPro" Type="varchar" MaxLength="71" />
+          <Property Name="IsrPactPr" Type="varchar" MaxLength="72" />
+          <Property Name="IsrImpPro" Type="varchar" MaxLength="73" />
+          <Property Name="DEThroughID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.tblDiasFestivos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblDiasFestivos">
+          <Key>
+            <PropertyRef Name="ClaveDiaFestivo" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ClavePaisID" />
+          </Key>
+          <Property Name="ClaveDiaFestivo" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClavePaisID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.tblDiasProvision' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblDiasProvision">
+          <Key>
+            <PropertyRef Name="DiasProvisionID" />
+          </Key>
+          <Property Name="DiasProvisionID" Type="int" Nullable="false" />
+          <Property Name="DiasProvision" Type="int" />
+          <Property Name="Version" Type="int" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="tblFlujoDeEfectivo">
+          <Key>
+            <PropertyRef Name="FlujoDeEfectivoID" />
+          </Key>
+          <Property Name="FlujoDeEfectivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoFlujoDeEfectivoID" Type="int" />
+          <Property Name="Valor" Type="float" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblMV">
+          <Key>
+            <PropertyRef Name="MVThroughID" />
+          </Key>
+          <Property Name="AreaID" Type="int" />
+          <Property Name="ClaveOperadoraID" Type="int" />
+          <Property Name="CveFondo" Type="varchar" MaxLength="50" />
+          <Property Name="ClaveSerie" Type="varchar" MaxLength="50" />
+          <Property Name="TV" Type="varchar" MaxLength="4" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" />
+          <Property Name="Titulos" Type="int" />
+          <Property Name="CveMov" Type="int" />
+          <Property Name="ImpBruto" Type="float" />
+          <Property Name="Hora" Type="varchar" MaxLength="50" />
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="MVThroughID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.tblNAV' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="tblNAV">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="int" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+          <Property Name="TV" Type="varchar" MaxLength="4" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" />
+          <Property Name="Version" Type="int" />
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="EstatusRegistroID" Type="int" />
+          <Property Name="UsuarioID" Type="uniqueidentifier" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="tblVector">
+          <Key>
+            <PropertyRef Name="VectorThroughID" />
+          </Key>
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="TV" Type="varchar" MaxLength="50" />
+          <Property Name="Emisora" Type="varchar" MaxLength="50" />
+          <Property Name="Serie" Type="varchar" MaxLength="50" />
+          <Property Name="PrecioLimpio" Type="float" />
+          <Property Name="Intereses" Type="float" />
+          <Property Name="PrecioSucio" Type="float" />
+          <Property Name="VectorThroughID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'DEV_Calc.dbo.tblVectorTest' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="tblVectorTest">
+          <Property Name="FechaOper" Type="date" />
+          <Property Name="TV" Type="varchar" MaxLength="50" />
+          <Property Name="Emisora" Type="varchar" MaxLength="50" />
+          <Property Name="Serie" Type="varchar" MaxLength="50" />
+          <Property Name="PrecioLimpio" Type="varchar" MaxLength="50" />
+          <Property Name="Intereses" Type="varchar" MaxLength="50" />
+          <Property Name="PrecioSucio" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DEV_Calc.dbo.TestCarteraPM' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TestCarteraPM">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="int" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="int" Nullable="false" />
+          <Property Name="TV" Type="varchar" MaxLength="4" />
+          <Property Name="Emisora" Type="varchar" MaxLength="7" />
+          <Property Name="Serie" Type="varchar" MaxLength="7" />
+          <Property Name="CostoPP" Type="int" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="Titulos" Type="int" />
+          <Property Name="ImporteCosto" Type="float" />
+          <Property Name="ImporteHoy" Type="float" />
+          <Property Name="PlusMin" Type="float" />
+          <Property Name="FechaOper" Type="date" />
+        </EntityType>
+        <Function Name="fntblNAV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaOperacion" Type="date" Mode="In" />
+          <Parameter Name="Operadora" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ClaveFondoID" Type="int" />
+                <Property Name="FondoDescripcion" Type="varchar" MaxLength="150" />
+                <Property Name="ValorNAV" Type="float" />
+                <Property Name="Instrumentos" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fntblNAVInst" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaOperacion" Type="date" Mode="In" />
+          <Parameter Name="ClaveFondo" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TV" Type="varchar" MaxLength="150" />
+                <Property Name="Emisora" Type="varchar" MaxLength="150" />
+                <Property Name="Serie" Type="varchar" MaxLength="150" />
+                <Property Name="Precios" Type="float" />
+                <Property Name="Titulos" Type="float" />
+                <Property Name="Costo" Type="float" />
+                <Property Name="PlusMin" Type="float" />
+                <Property Name="PrecioLimpio" Type="float" />
+                <Property Name="Intereses" Type="float" />
+                <Property Name="PrecioSucio" Type="float" />
+                <Property Name="NAV" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="DEV_CalcModelStoreContainer">
+          <EntitySet Name="tblDA" EntityType="Self.tblDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDE" EntityType="Self.tblDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFlujoDeEfectivo" EntityType="Self.tblFlujoDeEfectivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMV" EntityType="Self.tblMV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblVector" EntityType="Self.tblVector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_TCFix" EntityType="Self.tbl_TCFix" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_TCFix].[TCFixID] AS [TCFixID], 
+    [tbl_TCFix].[TCFix] AS [TCFix], 
+    [tbl_TCFix].[FechaOperacion] AS [FechaOperacion], 
+    [tbl_TCFix].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [tbl_TCFix].[UsuarioID] AS [UsuarioID], 
+    [tbl_TCFix].[Fecha] AS [Fecha]
+    FROM [dbo].[tbl_TCFix] AS [tbl_TCFix]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblCartera" EntityType="Self.tblCartera" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblCartera].[AreaID] AS [AreaID], 
+    [tblCartera].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [tblCartera].[TipoInversion] AS [TipoInversion], 
+    [tblCartera].[ClaveFondo] AS [ClaveFondo], 
+    [tblCartera].[ClaveSerie] AS [ClaveSerie], 
+    [tblCartera].[TV] AS [TV], 
+    [tblCartera].[Emisora] AS [Emisora], 
+    [tblCartera].[Serie] AS [Serie], 
+    [tblCartera].[Precios] AS [Precios], 
+    [tblCartera].[TitulosIniciales] AS [TitulosIniciales], 
+    [tblCartera].[Costo] AS [Costo], 
+    [tblCartera].[PlusMin] AS [PlusMin], 
+    [tblCartera].[FechaOper] AS [FechaOper], 
+    [tblCartera].[EstatusReprocesoID] AS [EstatusReprocesoID], 
+    [tblCartera].[OrdenReproceso] AS [OrdenReproceso], 
+    [tblCartera].[FechaRegistro] AS [FechaRegistro], 
+    [tblCartera].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [tblCartera].[UsuarioID] AS [UsuarioID]
+    FROM [dbo].[tblCartera] AS [tblCartera]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblDiasFestivos" EntityType="Self.tblDiasFestivos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblDiasFestivos].[ClaveDiaFestivo] AS [ClaveDiaFestivo], 
+    [tblDiasFestivos].[Fecha] AS [Fecha], 
+    [tblDiasFestivos].[Descripcion] AS [Descripcion], 
+    [tblDiasFestivos].[ClavePaisID] AS [ClavePaisID]
+    FROM [dbo].[tblDiasFestivos] AS [tblDiasFestivos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblDiasProvision" EntityType="Self.tblDiasProvision" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblDiasProvision].[DiasProvisionID] AS [DiasProvisionID], 
+    [tblDiasProvision].[DiasProvision] AS [DiasProvision], 
+    [tblDiasProvision].[Version] AS [Version], 
+    [tblDiasProvision].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [tblDiasProvision].[UsuarioID] AS [UsuarioID], 
+    [tblDiasProvision].[Fecha] AS [Fecha]
+    FROM [dbo].[tblDiasProvision] AS [tblDiasProvision]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblNAV" EntityType="Self.tblNAV" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblNAV].[AreaID] AS [AreaID], 
+    [tblNAV].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [tblNAV].[TV] AS [TV], 
+    [tblNAV].[Emisora] AS [Emisora], 
+    [tblNAV].[Serie] AS [Serie], 
+    [tblNAV].[Version] AS [Version], 
+    [tblNAV].[FechaOper] AS [FechaOper], 
+    [tblNAV].[EstatusRegistroID] AS [EstatusRegistroID], 
+    [tblNAV].[UsuarioID] AS [UsuarioID], 
+    [tblNAV].[Fecha] AS [Fecha]
+    FROM [dbo].[tblNAV] AS [tblNAV]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TestCarteraPM" EntityType="Self.TestCarteraPM" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TestCarteraPM].[AreaID] AS [AreaID], 
+    [TestCarteraPM].[ClaveOperadoraID] AS [ClaveOperadoraID], 
+    [TestCarteraPM].[TV] AS [TV], 
+    [TestCarteraPM].[Emisora] AS [Emisora], 
+    [TestCarteraPM].[Serie] AS [Serie], 
+    [TestCarteraPM].[CostoPP] AS [CostoPP], 
+    [TestCarteraPM].[Precio] AS [Precio], 
+    [TestCarteraPM].[Titulos] AS [Titulos], 
+    [TestCarteraPM].[ImporteCosto] AS [ImporteCosto], 
+    [TestCarteraPM].[ImporteHoy] AS [ImporteHoy], 
+    [TestCarteraPM].[PlusMin] AS [PlusMin], 
+    [TestCarteraPM].[FechaOper] AS [FechaOper]
+    FROM [dbo].[TestCarteraPM] AS [TestCarteraPM]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_CalcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fntblNAV_Result">
+          <Property Name="ClaveFondoID" Type="Int32" />
+          <Property Name="FondoDescripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ValorNAV" Type="Double" />
+          <Property Name="Instrumentos" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="fntblNAVInst_Result">
+          <Property Name="TV" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Precios" Type="Double" />
+          <Property Name="Titulos" Type="Double" />
+          <Property Name="Costo" Type="Double" />
+          <Property Name="PlusMin" Type="Double" />
+          <Property Name="PrecioLimpio" Type="Double" />
+          <Property Name="Intereses" Type="Double" />
+          <Property Name="PrecioSucio" Type="Double" />
+          <Property Name="NAV" Type="Double" />
+        </ComplexType>
+        <EntityType Name="tblDA">
+          <Key>
+            <PropertyRef Name="DerechosAmortizacionesID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="ClaveOperadoraID" Type="Int32" />
+          <Property Name="Derecho" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Portafolio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Posicion" Type="Double" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="ImporteBruto" Type="Double" />
+          <Property Name="Impuesto" Type="Double" />
+          <Property Name="PorcentajePosicion" Type="Double" />
+          <Property Name="Liquidacion" Type="DateTime" Precision="0" />
+          <Property Name="ImporteInicialNeto" Type="Double" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="DerechosAmortizacionesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblDE">
+          <Key>
+            <PropertyRef Name="DEThroughID" />
+          </Key>
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="CveFondo" Type="Int32" />
+          <Property Name="CveBmv" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PaisTrans" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MonedaTrans" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ImpMonOrig" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TipoCambio" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Pactado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DivGrex" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IsrFecId" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IsrMonId" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+          <Property Name="IsrTcId" Type="String" MaxLength="66" FixedLength="false" Unicode="false" />
+          <Property Name="IsrPactId" Type="String" MaxLength="67" FixedLength="false" Unicode="false" />
+          <Property Name="IsrImpId" Type="String" MaxLength="68" FixedLength="false" Unicode="false" />
+          <Property Name="IsrFecPro" Type="String" MaxLength="69" FixedLength="false" Unicode="false" />
+          <Property Name="IsrMonPro" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="IsrTcPro" Type="String" MaxLength="71" FixedLength="false" Unicode="false" />
+          <Property Name="IsrPactPr" Type="String" MaxLength="72" FixedLength="false" Unicode="false" />
+          <Property Name="IsrImpPro" Type="String" MaxLength="73" FixedLength="false" Unicode="false" />
+          <Property Name="DEThroughID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblFlujoDeEfectivo">
+          <Key>
+            <PropertyRef Name="FlujoDeEfectivoID" />
+          </Key>
+          <Property Name="FlujoDeEfectivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoFlujoDeEfectivoID" Type="Int32" />
+          <Property Name="Valor" Type="Double" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tblMV">
+          <Key>
+            <PropertyRef Name="MVThroughID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="ClaveOperadoraID" Type="Int32" />
+          <Property Name="CveFondo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveSerie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Titulos" Type="Int32" />
+          <Property Name="CveMov" Type="Int32" />
+          <Property Name="ImpBruto" Type="Double" />
+          <Property Name="Hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="MVThroughID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tblVector">
+          <Key>
+            <PropertyRef Name="VectorThroughID" />
+          </Key>
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="TV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrecioLimpio" Type="Double" />
+          <Property Name="Intereses" Type="Double" />
+          <Property Name="PrecioSucio" Type="Double" />
+          <Property Name="VectorThroughID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tbl_TCFix">
+          <Key>
+            <PropertyRef Name="TCFixID" />
+          </Key>
+          <Property Name="TCFixID" Type="Int32" Nullable="false" />
+          <Property Name="TCFix" Type="Decimal" Precision="7" Scale="4" />
+          <Property Name="FechaOperacion" Type="DateTime" Precision="0" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblCartera">
+          <Key>
+            <PropertyRef Name="TV" />
+            <PropertyRef Name="Emisora" />
+            <PropertyRef Name="Serie" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" />
+          <Property Name="ClaveOperadoraID" Type="Int32" />
+          <Property Name="TipoInversion" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveFondo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveSerie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precios" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="TitulosIniciales" Type="Double" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="PlusMin" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="EstatusReprocesoID" Type="Int32" />
+          <Property Name="OrdenReproceso" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+        </EntityType>
+        <EntityType Name="tblDiasFestivos">
+          <Key>
+            <PropertyRef Name="ClaveDiaFestivo" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ClavePaisID" />
+          </Key>
+          <Property Name="ClaveDiaFestivo" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClavePaisID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDiasProvision">
+          <Key>
+            <PropertyRef Name="DiasProvisionID" />
+          </Key>
+          <Property Name="DiasProvisionID" Type="Int32" Nullable="false" />
+          <Property Name="DiasProvision" Type="Int32" />
+          <Property Name="Version" Type="Int32" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblNAV">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="Int32" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+          <Property Name="EstatusRegistroID" Type="Int32" />
+          <Property Name="UsuarioID" Type="Guid" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TestCarteraPM">
+          <Key>
+            <PropertyRef Name="AreaID" />
+            <PropertyRef Name="ClaveOperadoraID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" Nullable="false" />
+          <Property Name="ClaveOperadoraID" Type="Int32" Nullable="false" />
+          <Property Name="TV" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Emisora" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Serie" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="CostoPP" Type="Int32" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="Titulos" Type="Int32" />
+          <Property Name="ImporteCosto" Type="Double" />
+          <Property Name="ImporteHoy" Type="Double" />
+          <Property Name="PlusMin" Type="Double" />
+          <Property Name="FechaOper" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="DEV_CalcEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDA" EntityType="Self.tblDA" />
+          <EntitySet Name="tblDE" EntityType="Self.tblDE" />
+          <EntitySet Name="tblFlujoDeEfectivo" EntityType="Self.tblFlujoDeEfectivo" />
+          <EntitySet Name="tblMV" EntityType="Self.tblMV" />
+          <EntitySet Name="tblVector" EntityType="Self.tblVector" />
+          <EntitySet Name="tbl_TCFix" EntityType="Self.tbl_TCFix" />
+          <EntitySet Name="tblCartera" EntityType="Self.tblCartera" />
+          <EntitySet Name="tblDiasFestivos" EntityType="Self.tblDiasFestivos" />
+          <EntitySet Name="tblDiasProvision" EntityType="Self.tblDiasProvision" />
+          <EntitySet Name="tblNAV" EntityType="Self.tblNAV" />
+          <EntitySet Name="TestCarteraPM" EntityType="Self.TestCarteraPM" />
+          <FunctionImport Name="fntblNAV" IsComposable="true" ReturnType="Collection(DEV_CalcModel.fntblNAV_Result)">
+            <Parameter Name="FechaOperacion" Mode="In" Type="DateTime" />
+            <Parameter Name="Operadora" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fntblNAVInst" IsComposable="true" ReturnType="Collection(DEV_CalcModel.fntblNAVInst_Result)">
+            <Parameter Name="FechaOperacion" Mode="In" Type="DateTime" />
+            <Parameter Name="ClaveFondo" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_CalcModelStoreContainer" CdmEntityContainer="DEV_CalcEntities">
+          <EntitySetMapping Name="tblDA">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblDA">
+              <MappingFragment StoreEntitySet="tblDA">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="Derecho" ColumnName="Derecho" />
+                <ScalarProperty Name="Portafolio" ColumnName="Portafolio" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ImporteBruto" ColumnName="ImporteBruto" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="PorcentajePosicion" ColumnName="PorcentajePosicion" />
+                <ScalarProperty Name="Liquidacion" ColumnName="Liquidacion" />
+                <ScalarProperty Name="ImporteInicialNeto" ColumnName="ImporteInicialNeto" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="DerechosAmortizacionesID" ColumnName="DerechosAmortizacionesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDE">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblDE">
+              <MappingFragment StoreEntitySet="tblDE">
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="CveFondo" ColumnName="CveFondo" />
+                <ScalarProperty Name="CveBmv" ColumnName="CveBmv" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="PaisTrans" ColumnName="PaisTrans" />
+                <ScalarProperty Name="MonedaTrans" ColumnName="MonedaTrans" />
+                <ScalarProperty Name="ImpMonOrig" ColumnName="ImpMonOrig" />
+                <ScalarProperty Name="TipoCambio" ColumnName="TipoCambio" />
+                <ScalarProperty Name="Pactado" ColumnName="Pactado" />
+                <ScalarProperty Name="DivGrex" ColumnName="DivGrex" />
+                <ScalarProperty Name="IsrFecId" ColumnName="IsrFecId" />
+                <ScalarProperty Name="IsrMonId" ColumnName="IsrMonId" />
+                <ScalarProperty Name="IsrTcId" ColumnName="IsrTcId" />
+                <ScalarProperty Name="IsrPactId" ColumnName="IsrPactId" />
+                <ScalarProperty Name="IsrImpId" ColumnName="IsrImpId" />
+                <ScalarProperty Name="IsrFecPro" ColumnName="IsrFecPro" />
+                <ScalarProperty Name="IsrMonPro" ColumnName="IsrMonPro" />
+                <ScalarProperty Name="IsrTcPro" ColumnName="IsrTcPro" />
+                <ScalarProperty Name="IsrPactPr" ColumnName="IsrPactPr" />
+                <ScalarProperty Name="IsrImpPro" ColumnName="IsrImpPro" />
+                <ScalarProperty Name="DEThroughID" ColumnName="DEThroughID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFlujoDeEfectivo">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblFlujoDeEfectivo">
+              <MappingFragment StoreEntitySet="tblFlujoDeEfectivo">
+                <ScalarProperty Name="FlujoDeEfectivoID" ColumnName="FlujoDeEfectivoID" />
+                <ScalarProperty Name="TipoFlujoDeEfectivoID" ColumnName="TipoFlujoDeEfectivoID" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMV">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblMV">
+              <MappingFragment StoreEntitySet="tblMV">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="CveFondo" ColumnName="CveFondo" />
+                <ScalarProperty Name="ClaveSerie" ColumnName="ClaveSerie" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
+                <ScalarProperty Name="CveMov" ColumnName="CveMov" />
+                <ScalarProperty Name="ImpBruto" ColumnName="ImpBruto" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="MVThroughID" ColumnName="MVThroughID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblVector">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblVector">
+              <MappingFragment StoreEntitySet="tblVector">
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="PrecioLimpio" ColumnName="PrecioLimpio" />
+                <ScalarProperty Name="Intereses" ColumnName="Intereses" />
+                <ScalarProperty Name="PrecioSucio" ColumnName="PrecioSucio" />
+                <ScalarProperty Name="VectorThroughID" ColumnName="VectorThroughID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TCFix">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tbl_TCFix">
+              <MappingFragment StoreEntitySet="tbl_TCFix">
+                <ScalarProperty Name="TCFixID" ColumnName="TCFixID" />
+                <ScalarProperty Name="TCFix" ColumnName="TCFix" />
+                <ScalarProperty Name="FechaOperacion" ColumnName="FechaOperacion" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCartera">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblCartera">
+              <MappingFragment StoreEntitySet="tblCartera">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="TipoInversion" ColumnName="TipoInversion" />
+                <ScalarProperty Name="ClaveFondo" ColumnName="ClaveFondo" />
+                <ScalarProperty Name="ClaveSerie" ColumnName="ClaveSerie" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Precios" ColumnName="Precios" />
+                <ScalarProperty Name="TitulosIniciales" ColumnName="TitulosIniciales" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="PlusMin" ColumnName="PlusMin" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="EstatusReprocesoID" ColumnName="EstatusReprocesoID" />
+                <ScalarProperty Name="OrdenReproceso" ColumnName="OrdenReproceso" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDiasFestivos">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblDiasFestivos">
+              <MappingFragment StoreEntitySet="tblDiasFestivos">
+                <ScalarProperty Name="ClaveDiaFestivo" ColumnName="ClaveDiaFestivo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ClavePaisID" ColumnName="ClavePaisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDiasProvision">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblDiasProvision">
+              <MappingFragment StoreEntitySet="tblDiasProvision">
+                <ScalarProperty Name="DiasProvisionID" ColumnName="DiasProvisionID" />
+                <ScalarProperty Name="DiasProvision" ColumnName="DiasProvision" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNAV">
+            <EntityTypeMapping TypeName="DEV_CalcModel.tblNAV">
+              <MappingFragment StoreEntitySet="tblNAV">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestCarteraPM">
+            <EntityTypeMapping TypeName="DEV_CalcModel.TestCarteraPM">
+              <MappingFragment StoreEntitySet="TestCarteraPM">
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+                <ScalarProperty Name="ClaveOperadoraID" ColumnName="ClaveOperadoraID" />
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="CostoPP" ColumnName="CostoPP" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
+                <ScalarProperty Name="ImporteCosto" ColumnName="ImporteCosto" />
+                <ScalarProperty Name="ImporteHoy" ColumnName="ImporteHoy" />
+                <ScalarProperty Name="PlusMin" ColumnName="PlusMin" />
+                <ScalarProperty Name="FechaOper" ColumnName="FechaOper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="DEV_CalcModel.Store.fntblNAV" FunctionImportName="fntblNAV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_CalcModel.fntblNAV_Result">
+                <ScalarProperty Name="ClaveFondoID" ColumnName="ClaveFondoID" />
+                <ScalarProperty Name="FondoDescripcion" ColumnName="FondoDescripcion" />
+                <ScalarProperty Name="ValorNAV" ColumnName="ValorNAV" />
+                <ScalarProperty Name="Instrumentos" ColumnName="Instrumentos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="DEV_CalcModel.Store.fntblNAVInst" FunctionImportName="fntblNAVInst">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_CalcModel.fntblNAVInst_Result">
+                <ScalarProperty Name="TV" ColumnName="TV" />
+                <ScalarProperty Name="Emisora" ColumnName="Emisora" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Precios" ColumnName="Precios" />
+                <ScalarProperty Name="Titulos" ColumnName="Titulos" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="PlusMin" ColumnName="PlusMin" />
+                <ScalarProperty Name="PrecioLimpio" ColumnName="PrecioLimpio" />
+                <ScalarProperty Name="Intereses" ColumnName="Intereses" />
+                <ScalarProperty Name="PrecioSucio" ColumnName="PrecioSucio" />
+                <ScalarProperty Name="NAV" ColumnName="NAV" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
